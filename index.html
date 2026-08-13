@@ -1,114 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quadratic Factoring Practice</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="background-animation"></div>
-    
-    <header>
-        <h1>🌿 The Quadratic Garden 🌿</h1>
-        <p class="subtitle">Practice Factoring Quadratic Expressions</p>
-        <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
-            <span class="theme-icon">🌙</span>
-        </button>
-    </header>
-
-    <main>
-        <div class="settings-panel">
-            <h2>Settings</h2>
-            <div class="setting-group">
-                <label class="setting-label">
-                    Difficulty:
-                    <select id="difficulty">
-                        <option value="easy">Easy (leading coefficient = 1)</option>
-                        <option value="hard">Hard (leading coefficient ≠ 1)</option>
-                    </select>
-                </label>
-            </div>
-            <div class="setting-group">
-                <label class="checkbox-label">
-                    <input type="checkbox" id="common-factors">
-                    <span>Include common factors</span>
-                </label>
-            </div>
-            <button id="new-problem" class="btn-primary">Generate New Problem</button>
-        </div>
-
-        <div class="problem-area">
-            <div class="problem-display">
-                <h3>Factor this expression:</h3>
-                <div id="expression" class="expression"></div>
-            </div>
-
-            <div class="answer-section">
-                <label for="answer-input">Your answer:</label>
-                <input type="text" id="answer-input" placeholder="Enter factored form (e.g., (x+2)(x-3) or 2(x+1)(x-1))">
-                <div class="button-group">
-                    <button id="check-answer" class="btn-check">Check Answer</button>
-                    <button id="show-hint" class="btn-hint">Show Hint</button>
-                </div>
-            </div>
-
-            <div id="feedback" class="feedback"></div>
-            <div id="hint" class="hint"></div>
-        </div>
-
-        <div class="stats-panel">
-            <h3>Your Progress</h3>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-label">Correct:</span>
-                    <span id="correct-count" class="stat-value success">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Attempted:</span>
-                    <span id="attempt-count" class="stat-value">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Accuracy:</span>
-                    <span id="accuracy" class="stat-value">0%</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Streak:</span>
-                    <span id="streak" class="stat-value streak">0</span>
-                </div>
-            </div>
-            <button id="reset-stats" class="btn-secondary">Reset Stats</button>
-        </div>
-    </main>
-
-    <div class="leaves">
-        <div class="leaf leaf1">🍃</div>
-        <div class="leaf leaf2">🌿</div>
-        <div class="leaf leaf3">🍀</div>
-        <div class="leaf leaf4">🌱</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      name="description"
+      content="A quiet garden for practicing factoring quadratic expressions, with or without common factors."
+    />
+    <title>The Factoring Garden</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true">
+      <div class="sky"></div>
+      <div class="mist"></div>
+      <svg class="landscape" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMax slice">
+        <defs>
+          <linearGradient id="hill-far" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1a3328" />
+            <stop offset="100%" stop-color="#12241c" />
+          </linearGradient>
+          <linearGradient id="hill-near" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#163026" />
+            <stop offset="100%" stop-color="#0d1c16" />
+          </linearGradient>
+          <radialGradient id="pond-fill" cx="50%" cy="40%" r="70%">
+            <stop offset="0%" stop-color="#2a5a4c" />
+            <stop offset="55%" stop-color="#16382f" />
+            <stop offset="100%" stop-color="#0b1f1a" />
+          </radialGradient>
+        </defs>
+        <path fill="url(#hill-far)" d="M0 470 C 180 410, 320 520, 520 450 C 720 380, 880 500, 1200 420 L 1200 800 L 0 800 Z" />
+        <ellipse class="pond" cx="620" cy="610" rx="340" ry="92" fill="url(#pond-fill)" />
+        <ellipse class="ripple r1" cx="620" cy="610" rx="210" ry="48" />
+        <ellipse class="ripple r2" cx="620" cy="610" rx="140" ry="30" />
+        <ellipse class="ripple r3" cx="620" cy="610" rx="70" ry="14" />
+        <path fill="url(#hill-near)" d="M0 560 C 160 500, 300 620, 480 540 C 640 470, 820 610, 1200 530 L 1200 800 L 0 800 Z" />
+        <g class="reeds" fill="#1d3d30">
+          <path d="M168 800 C 160 640, 186 560, 176 430 C 196 560, 178 680, 198 800 Z" />
+          <path d="M214 800 C 208 660, 236 580, 224 460 C 248 590, 226 700, 246 800 Z" />
+          <path d="M980 800 C 992 650, 964 560, 978 440 C 954 570, 988 690, 960 800 Z" />
+          <path d="M1034 800 C 1048 670, 1012 590, 1028 480 C 1004 600, 1040 710, 1012 800 Z" />
+        </g>
+        <g class="lantern" fill="#d4b483">
+          <rect x="888" y="498" width="18" height="8" rx="1" opacity="0.55" />
+          <rect x="892" y="454" width="10" height="44" rx="1" opacity="0.35" />
+          <path d="M884 454 H 910 L 906 444 H 888 Z" opacity="0.7" />
+          <circle cx="897" cy="468" r="5" opacity="0.85" />
+        </g>
+      </svg>
+      <div class="motes">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <p>Built for math students everywhere</p>
-            <div class="footer-links">
-                <a href="https://github.com/JD-Jones-ASES/factoring" target="_blank" rel="noopener noreferrer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    View on GitHub
-                </a>
-                <a href="https://paypal.me/jdjonestexas" target="_blank" rel="noopener noreferrer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.067 8.478c.492.88.556 2.014.3 3.327-.74 3.806-3.276 5.12-6.514 5.12h-.5a.805.805 0 0 0-.794.68l-.04.22-.63 3.993-.028.133a.802.802 0 0 1-.792.679H8.32c-.29 0-.507-.26-.453-.544l.003-.012 1.445-9.12c.062-.39.412-.68.806-.68h2.065c2.935 0 5.242-.958 6.456-3.33a4.242 4.242 0 0 0 .425-1.466z"/>
-                        <path d="M6.78 4.482l-.014.09L5.5 13.41a.802.802 0 0 0 .79.918h2.652l.666-4.22.026-.165a.805.805 0 0 1 .793-.68h.5c3.238 0 5.774-1.314 6.514-5.12.256-1.313.192-2.447-.3-3.327a3.992 3.992 0 0 0-1.19-1.28C14.778-.26 13.542 0 12.246 0H6.86a.807.807 0 0 0-.797.68l-.04.22-.243 1.582z"/>
-                    </svg>
-                    Support via PayPal
-                </a>
-            </div>
-        </div>
-    </footer>
+    <a class="skip-link" href="#app">Skip to content</a>
 
-    <script src="script.js"></script>
-</body>
+    <div id="app" class="app">
+      <header class="masthead">
+        <p class="eyebrow">Quadratic practice</p>
+        <h1>The Factoring Garden</h1>
+        <p class="lede">
+          A still place to factor. Choose a path, then work one expression at a time.
+        </p>
+      </header>
+
+      <main>
+        <section id="view-setup" class="panel view is-active" aria-labelledby="setup-title">
+          <h2 id="setup-title" class="panel-title">Choose a path</h2>
+
+          <fieldset class="fieldset">
+            <legend>Difficulty</legend>
+            <p class="hint">Every problem is a factorable quadratic with integer coefficients.</p>
+            <div id="difficulty-group" class="choice-grid"></div>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend>Common factors</legend>
+            <p class="hint">When this is on, a shared integer should come out first.</p>
+            <div id="common-group" class="choice-grid"></div>
+          </fieldset>
+
+          <button id="start-btn" class="btn primary" type="button">Begin practice</button>
+        </section>
+
+        <section id="view-play" class="panel view" hidden aria-labelledby="play-title">
+          <div class="play-top">
+            <h2 id="play-title" class="visually-hidden">Practice</h2>
+            <ul class="stats" aria-label="Session stats">
+              <li><span>Time</span> <strong id="stat-time">00:00</strong></li>
+              <li><span>Answered</span> <strong id="stat-answered">0</strong></li>
+              <li><span>Streak</span> <strong id="stat-streak">0</strong></li>
+              <li><span>Accuracy</span> <strong id="stat-accuracy">100%</strong></li>
+            </ul>
+            <button id="end-btn" class="btn ghost" type="button">End session</button>
+          </div>
+
+          <p class="prompt">Factor completely over the integers</p>
+          <div id="expression" class="expression" aria-live="polite"></div>
+
+          <form id="answer-form" class="answer-row">
+            <label class="visually-hidden" for="answer-input">Factored form</label>
+            <input
+              id="answer-input"
+              name="answer"
+              type="text"
+              autocomplete="off"
+              enterkeyhint="done"
+              spellcheck="false"
+              autocapitalize="off"
+              placeholder="(x+2)(x−3)"
+            />
+            <button id="submit-btn" class="btn primary" type="submit">Check</button>
+          </form>
+
+          <div id="play-actions" class="play-actions">
+            <button id="hint-btn" class="btn ghost" type="button">Hint</button>
+            <button id="reveal-btn" class="btn ghost" type="button">Reveal</button>
+            <button id="skip-btn" class="btn ghost" type="button">Skip</button>
+          </div>
+
+          <button id="continue-btn" class="btn primary" type="button" hidden>Next</button>
+          <p id="feedback" class="feedback" hidden></p>
+          <p id="hint" class="hint-card" hidden></p>
+          <p class="kbd-hint">Enter checks or continues. Escape ends the session.</p>
+        </section>
+
+        <section id="view-summary" class="panel view" hidden aria-labelledby="summary-title">
+          <h2 id="summary-title" class="panel-title">Session complete</h2>
+          <ul class="summary-grid">
+            <li>
+              <span>Time</span>
+              <strong id="summary-time">00:00</strong>
+            </li>
+            <li>
+              <span>Score</span>
+              <strong id="summary-score">0 / 0</strong>
+            </li>
+            <li>
+              <span>Accuracy</span>
+              <strong id="summary-accuracy">100%</strong>
+            </li>
+            <li>
+              <span>Best streak</span>
+              <strong id="summary-streak">0</strong>
+            </li>
+          </ul>
+          <div class="actions">
+            <button id="again-btn" class="btn primary" type="button">Practice again</button>
+            <button id="settings-btn" class="btn ghost" type="button">Change path</button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Open-source math practice. MIT License.</p>
+      </footer>
+    </div>
+
+    <div id="live" class="visually-hidden" aria-live="polite"></div>
+
+    <script src="math.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>

@@ -1,130 +1,53 @@
-# Nature's Quadratic Garden 🌿
+# The Factoring Garden
 
-An interactive web application for students to practice factoring quadratic expressions. With a nature-inspired design and engaging interface, students can build their factoring skills through unlimited practice problems with instant feedback.
+A small, dependency-free quadratic factoring trainer in the browser. Choose a difficulty, decide whether problems include a common integer factor, and work one expression at a time.
 
-## Features
+This is a rebuild of an older single-page prototype. The concept is the same; the implementation has shared math logic, keyboard-friendly controls, and no third-party services.
 
-### Core Functionality
-- **Unlimited Practice Problems**: Generate endless quadratic expressions to factor
-- **Two Difficulty Levels**:
-  - **Easy Mode**: Quadratics with leading coefficient = 1 (format: x² + Bx + C)
-  - **Hard Mode**: Quadratics with leading coefficient ≠ 1 (format: Ax² + Bx + C)
-- **Common Factors Option**: Toggle to include problems with common factors that need to be factored out first
-- **Intelligent Answer Checking**: Accepts multiple valid formats for factored expressions
-- **Hint System**: Get helpful hints and see the correct answer when needed
+## Practice
 
-### User Experience
-- **Progress Tracking**: Monitor your performance with real-time statistics:
-  - Number of correct answers
-  - Total attempts
-  - Accuracy percentage
-  - Current streak
-- **Theme Toggle**: Switch between dark mode (default) and light mode
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
-- **Nature-Themed Interface**: Calming green color palette with animated leaves
+Open `index.html` in a browser, or serve the folder:
 
-### Input Flexibility
-The application accepts answers in various formats:
-- `(x+2)(x-3)`
-- `(2x+1)(x-5)`
-- `3(x+1)(x-2)`
-- `-(x+4)(x-1)`
-
-## How It Works
-
-### Problem Generation
-The application generates quadratic expressions using the formula:
-
-```
-a(bx + c)(dx + e) = a·b·d·x² + a(b·e + c·d)x + a·c·e
-```
-
-Where:
-- `a` = common factor (1-4, or always 1 if common factors disabled)
-- `b`, `d` = coefficients for x terms in each factor
-- `c`, `e` = constant terms in each factor
-
-**Easy Mode**: Sets b = 1 and d = 1, resulting in quadratics with leading coefficient = 1
-
-**Hard Mode**: Allows b and d to vary (1-4), creating quadratics with various leading coefficients
-
-### Answer Verification
-The system parses your input, expands it algebraically, and checks if it matches the original expression. This means any mathematically equivalent factorization is accepted!
-
-## Getting Started
-
-### Installation
-1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/natures-quadratic-garden.git
+python3 -m http.server 8080
 ```
 
-2. Open `index.html` in your web browser
+Then visit `http://localhost:8080`.
 
-That's it! No build process or dependencies required.
+1. Choose a difficulty:
+   - **Easy** — monic quadratics with small integers, such as `x² + 5x + 6`
+   - **Medium** — monic quadratics with a wider integer range
+   - **Hard** — leading coefficient is not 1, such as `6x² + 5x − 6`
+2. Choose whether a common integer factor should appear.
+3. Begin the session and enter a factored form, then press Enter.
+4. Use **Hint** for a nudge that does not give the factorization away. **Reveal** shows one correct form.
+5. Escape or **End session** opens a short summary.
 
-### Usage
-1. Select your difficulty level (Easy or Hard)
-2. Choose whether to include common factors
-3. A quadratic expression will appear
-4. Enter your factored form in the input box
-5. Click "Check Answer" or press Enter
-6. Get instant feedback and track your progress!
+Accepted spellings include `(x+2)(x-3)`, `(2x+1)(x-5)`, `3(x+1)(x-2)`, `x(x+5)`, and `(x+2)^2`. Any integer factorization that expands to the shown expression is counted as correct.
 
-## File Structure
+Last-used settings stay in `localStorage` on that browser. Nothing is sent anywhere.
+
+## Files
 
 ```
-natures-quadratic-garden/
-│
-├── index.html          # Main HTML structure and embedded JavaScript
-├── script.js           # Standalone JavaScript file (alternative)
-├── README.md           # This file
-└── LICENSE             # MIT License
+index.html      Setup, practice, and summary views
+app.js          UI and session flow
+math.js         Problem generation, parsing, and scoring
+styles.css      Layout and garden theme
+favicon.svg     App icon
+test/           Node tests for math.js
 ```
 
-## Browser Compatibility
+When common factors are off, generated expressions have integer GCF 1. When they are on, a shared integer of at least 2 is present. Hard problems stay non-monic after that GCF is removed.
 
-Works in all modern browsers:
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
-- Opera (latest)
+## Tests
 
-## Educational Value
+Node 18+ is enough. No install step.
 
-This tool helps students:
-- Practice factoring quadratics with immediate feedback
-- Understand the relationship between factored and expanded forms
-- Build confidence through gamified progress tracking
-- Learn to recognize patterns in quadratic factoring
-- Prepare for algebra tests and standardized exams
-
-## Technical Details
-
-- **Pure Vanilla JavaScript**: No frameworks or libraries required
-- **Client-Side Only**: All computation happens in the browser
-- **In-Memory Storage**: Stats and theme preference stored during session
-- **Responsive CSS**: Mobile-first design with CSS Grid and Flexbox
-
-## Contributing
-
-Contributions are welcome! Here are some ways you can help:
-- Report bugs or suggest features via GitHub Issues
-- Submit pull requests for enhancements
-- Improve documentation
-- Share with students and educators
+```bash
+npm test
+```
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Inspired by the need for engaging, accessible math practice tools
-- Nature theme designed to create a calming learning environment
-
-## Contact
-
-Questions, suggestions, or feedback? Feel free to open an issue on GitHub!
-
----
+MIT License. Copyright (c) 2025-2026 JD Jones. See [LICENSE](LICENSE).
