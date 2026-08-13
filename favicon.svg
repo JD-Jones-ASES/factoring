@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="The Factoring Garden">
+  <rect width="32" height="32" rx="8" fill="#0d1612"/>
+  <ellipse cx="16" cy="20" rx="10" ry="4.2" fill="#16382f"/>
+  <ellipse cx="16" cy="20" rx="6.5" ry="2.4" fill="none" stroke="#6fa38f" stroke-width="1.2"/>
+  <path d="M16 7c3.2 3.4 4.4 6.6 0 12C11.6 13.6 12.8 10.4 16 7z" fill="#9dcc8f"/>
+  <circle cx="23" cy="10" r="1.4" fill="#d4b483"/>
+</svg>
