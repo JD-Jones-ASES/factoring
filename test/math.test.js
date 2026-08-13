@@ -148,11 +148,13 @@ test("hard problems keep a non-monic leading coefficient after any GCF", () => {
   for (let i = 0; i < 40; i += 1) {
     const plain = math.generateProblem({ difficulty: "hard", commonFactors: false });
     assert.ok(plain.A > 1);
+    assert.ok(plain.A <= 9);
     assert.equal(math.gcd3(plain.A, plain.B, plain.C), 1);
 
     const shared = math.generateProblem({ difficulty: "hard", commonFactors: true });
     assert.ok(shared.commonFactor >= 2);
     assert.ok(shared.A / shared.commonFactor > 1);
+    assert.ok(shared.A <= 27);
   }
 });
 

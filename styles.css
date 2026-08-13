@@ -406,6 +406,11 @@ input[type="text"] {
   text-align: center;
 }
 
+input[type="text"]::placeholder {
+  color: var(--muted);
+  opacity: 0.65;
+}
+
 .play-actions {
   margin-top: 0.85rem;
 }

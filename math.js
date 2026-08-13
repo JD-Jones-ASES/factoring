@@ -35,9 +35,9 @@
       example: "6x² + 5x − 6",
       monic: false,
       innerLeadMin: 1,
-      innerLeadMax: 4,
-      constMin: -8,
-      constMax: 8,
+      innerLeadMax: 3,
+      constMin: -6,
+      constMax: 6,
     },
   ];
 
@@ -231,7 +231,7 @@
 
   function tryGenerate(config, rng) {
     const spec = difficultyById(config.difficulty);
-    const a = config.commonFactors ? rng.int(2, 5) : 1;
+    const a = config.commonFactors ? rng.int(2, spec.monic ? 4 : 3) : 1;
     let b;
     let d;
     if (spec.monic) {
